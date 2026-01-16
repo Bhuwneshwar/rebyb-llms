@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>AI Server API Documentation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #0f172a;
+                color: #e5e7eb;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+            }
+            header {
+                background: #020617;
+                padding: 20px;
+                border-bottom: 1px solid #1e293b;
+            }
+            h1,
+            h2,
+            h3 {
+                color: #38bdf8;
+            }
+            section {
+                padding: 20px;
+                border-bottom: 1px solid #1e293b;
+            }
+            code,
+            pre {
+                background: #020617;
+                color: #22c55e;
+                padding: 10px;
+                border-radius: 6px;
+                overflow-x: auto;
+            }
+            pre {
+                margin-top: 10px;
+            }
+            .endpoint {
+                background: #020617;
+                padding: 10px;
+                border-left: 4px solid #38bdf8;
+                margin: 10px 0;
+            }
+            .method {
+                color: #facc15;
+                font-weight: bold;
+            }
+            footer {
+                padding: 20px;
+                text-align: center;
+                background: #020617;
+                color: #94a3b8;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>AI Server API Documentation</h1>
+            <p>Unified API for GitHub Models, Groq, and Google Gemini</p>
+            <p>
+                <strong>Base URL:</strong>
+                <code>https://rebyb-llms.onrender.com</code>
+            </p>
+        </header>
+
+        <section>
+            <h2>Overview</h2>
+            <p>
+                This server provides a simple REST API to interact with multiple
+                AI providers:
+            </p>
+            <ul>
+                <li>✅ GitHub Models (OpenAI-compatible)</li>
+                <li>✅ Groq</li>
+                <li>✅ Google Gemini</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Common Request Parameters</h2>
+            <pre>
+{
+  "prompt": "Your question or input text",
+  "systemPrompt": "Optional system instruction",
+  "model": "Optional model name",
+  "apiKey": "Optional API key override"
+}
+  </pre
+            >
+        </section>
+
+        <section>
+            <h2>1️⃣ Unified AI Endpoint (Auto Fallback)</h2>
+            <div class="endpoint">
+                <span class="method">POST / GET</span> <code>/ai</code>
+            </div>
+
+            <pre>
+curl -X POST https://rebyb-llms.onrender.com/ai \
+-H "Content-Type: application/json" \
+-d '{
+  "prompt": "Explain JavaScript closures",
+  "systemPrompt": "You are a helpful teacher"
+}'
+  </pre
+            >
+
+            <pre>
+{
+  "ans": "Explanation text...",
+  "errors": []
+}
+  </pre
+            >
+        </section>
+
+        <section>
+            <h2>2️⃣ GitHub Models API</h2>
+            <div class="endpoint">
+                <span class="method">POST / GET</span>
+                <code>/ai/github-model</code>
+            </div>
+
+            <pre>
+fetch("https://rebyb-llms.onrender.com/ai/github-model", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    prompt: "Write a Node.js example",
+    systemPrompt: "You are a senior developer"
+  })
+});
+  </pre
+            >
+        </section>
+
+        <section>
+            <h2>3️⃣ Groq API</h2>
+            <div class="endpoint">
+                <span class="method">POST / GET</span> <code>/ai/groq</code>
+            </div>
+
+            <pre>
+curl "https://rebyb-llms.onrender.com/ai/groq?prompt=Explain REST APIs"
+  </pre
+            >
+        </section>
+
+        <section>
+            <h2>4️⃣ Gemini API</h2>
+            <div class="endpoint">
+                <span class="method">POST / GET</span> <code>/ai/gemini</code>
+            </div>
+
+            <pre>
+fetch("https://rebyb-llms.onrender.com/ai/gemini", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    prompt: "Summarize HTTP status codes"
+  })
+});
+  </pre
+            >
+        </section>
+
+        <section>
+            <h2>Environment Variables</h2>
+            <pre>
+GITHUB_TOKEN=your_github_models_token
+GROQ_API_KEY=your_groq_api_key
+GEMINI_API_KEY=your_gemini_api_key
+  </pre
+            >
+        </section>
+
+        <footer>
+            <p>AI Multi-Provider Server • Express • Node.js</p>
+        </footer>
+    </body>
+</html>

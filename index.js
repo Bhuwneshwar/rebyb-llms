@@ -122,7 +122,7 @@ const askGemini = async (prompt, systemPrompt) => {
 };
 
 app.get("/", (req, res) => {
-    res.send("response from ai");
+    res.sendFile(process.cwd() + "/docs.html");
 });
 
 let errors = [];
